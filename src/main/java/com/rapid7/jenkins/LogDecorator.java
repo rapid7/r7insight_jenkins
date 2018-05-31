@@ -18,8 +18,7 @@ public class LogDecorator extends LineTransformationOutputStream {
      * @throws IOException
      * @throws UnknownHostException
      */
-    public LogDecorator(OutputStream os, LogWriter leWriter)
-            throws UnknownHostException, IOException {
+    public LogDecorator(OutputStream os, LogWriter leWriter) throws IOException {
         this.wrappedOutputStream = os;
         this.leWriter = leWriter;
     }

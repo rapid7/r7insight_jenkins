@@ -32,7 +32,7 @@ public class LogTcpTokenWriter implements LogWriter {
     /**
      * Constructor
      *
-     * @param token The token for the logfile
+     * @param token    The token for the logfile
      * @param endpoint Endpoints to transmit the logs
      * @throws IOException If there was a problem connecting to Rapid7 InsightOps.
      */
