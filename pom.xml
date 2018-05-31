@@ -14,9 +14,8 @@
 	<packaging>hpi</packaging>
 
 
-	<name>Rapid7 InsightOps Forwarder</name>
+	<name>Rapid7 InsightOps Log Forwarder</name>
 	<description>Forwards console output for a build to Rapid7 InsightOps</description>
-	<url>http://wiki.jenkins-ci.org/display/JENKINS/Rapid7+Insight+Plugin</url>
 	<licenses>
 		<license>
 			<name>The MIT license</name>

@@ -13,16 +13,16 @@ public class AsynchronousLogWriter implements LogWriter {
     private static final int SHUTDOWN_TIMEOUT_SECONDS = 10;
 
     private final ExecutorService executor;
-    private final LogWriter leWriter;
+    private final LogWriter logWriter;
 
     /**
      * Constructor.
      *
-     * @param leWriter Used to write entries to Rapid7 InsightOps.
+     * @param logWriter Used to write entries to Rapid7 InsightOps.
      */
-    public AsynchronousLogWriter(LogWriter leWriter) {
+    public AsynchronousLogWriter(LogWriter logWriter) {
         this.executor = Executors.newSingleThreadExecutor();
-        this.leWriter = leWriter;
+        this.logWriter = logWriter;
     }
 
     /**
@@ -37,7 +37,7 @@ public class AsynchronousLogWriter implements LogWriter {
             @Override
             public void run() {
                 try {
-                    leWriter.writeLogentry(line);
+                    logWriter.writeLogentry(line);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -57,7 +57,7 @@ public class AsynchronousLogWriter implements LogWriter {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            leWriter.close();
+            logWriter.close();
         }
     }
 }
