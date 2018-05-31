@@ -32,13 +32,6 @@
 		</repository>
 	</distributionManagement>
 
-	<developers>
-		<developer>
-			<id>stbutler11</id>
-			<name>Stuart Butler</name>
-		</developer>
-	</developers>
-
 	<scm>
 		<connection>scm:git:git://github.com/rapid7/r7insight_jenkins.git</connection>
 		<developerConnection>scm:git:git@github.com:rapid7/r7insight_jenkins.git</developerConnection>
