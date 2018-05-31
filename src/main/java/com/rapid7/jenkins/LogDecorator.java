@@ -1,4 +1,4 @@
-package com.logentries.jenkins;
+package com.rapid7.jenkins;
 
 import hudson.console.LineTransformationOutputStream;
 
@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.UnknownHostException;
 
-public class LogentriesLogDecorator extends LineTransformationOutputStream {
+public class LogDecorator extends LineTransformationOutputStream {
 
     private final OutputStream wrappedOutputStream;
-    private final LogentriesWriter leWriter;
+    private final LogWriter leWriter;
 
     /**
      * Constructor
@@ -18,7 +18,7 @@ public class LogentriesLogDecorator extends LineTransformationOutputStream {
      * @throws IOException
      * @throws UnknownHostException
      */
-    public LogentriesLogDecorator(OutputStream os, LogentriesWriter leWriter)
+    public LogDecorator(OutputStream os, LogWriter leWriter)
             throws UnknownHostException, IOException {
         this.wrappedOutputStream = os;
         this.leWriter = leWriter;

@@ -1,4 +1,4 @@
-package com.logentries.jenkins;
+package com.rapid7.jenkins;
 
 
 import javax.net.ssl.SSLSocketFactory;
@@ -10,7 +10,7 @@ import java.nio.charset.Charset;
 /**
  * Writes lines to Rapid7 InsightOps using the Token TCP input
  */
-public class LogentriesTcpTokenWriter implements LogentriesWriter {
+public class LogTcpTokenWriter implements LogWriter {
 
     /**
      * Rapid7 InsightOps API server address.
@@ -36,7 +36,7 @@ public class LogentriesTcpTokenWriter implements LogentriesWriter {
      * @param endpoint Endpoints to transmit the logs
      * @throws IOException If there was a problem connecting to Rapid7 InsightOps.
      */
-    public LogentriesTcpTokenWriter(String token, String endpoint) throws IOException {
+    public LogTcpTokenWriter(String token, String endpoint) throws IOException {
         this.token = token;
         socket = SSLSocketFactory.getDefault().createSocket(endpoint, PORT);
         outputStream = socket.getOutputStream();

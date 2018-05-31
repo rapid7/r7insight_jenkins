@@ -1,4 +1,4 @@
-package com.logentries.jenkins;
+package com.rapid7.jenkins;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
@@ -17,14 +17,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class LogentriesLogDecoratorTest {
+public class LogDecoratorTest {
 	
 	/** UTF-8 output character set. */
 	private static final Charset UTF8 = Charset.forName("UTF-8");
 
 	private OutputStream mockOs;
-	private LogentriesWriter mockLogentriesWriter;
-	private LogentriesLogDecorator logDecorator;
+	private LogWriter mockLogWriter;
+	private LogDecorator logDecorator;
 	
 	
 	/**
@@ -35,13 +35,13 @@ public class LogentriesLogDecoratorTest {
 	@Before
 	public void initMocks() throws UnknownHostException, IOException {
 		mockOs = createMock(OutputStream.class);
-		mockLogentriesWriter = createMock(LogentriesWriter.class);
-		logDecorator = new LogentriesLogDecorator(mockOs, mockLogentriesWriter);
+		mockLogWriter = createMock(LogWriter.class);
+		logDecorator = new LogDecorator(mockOs, mockLogWriter);
 	}
 	
 	/**
 	 * Verifies that lines are written to both the wrapped OutputStream and the 
-	 * LogentriesWriter.
+	 * LogWriter.
 	 * @throws IOException Shouldn't happen
 	 */
 	@Test
@@ -52,19 +52,19 @@ public class LogentriesLogDecoratorTest {
 				"Output line3"
 		};
 		for (String line : lines) {
-			mockLogentriesWriter.writeLogentry(line);
+			mockLogWriter.writeLogentry(line);
 			mockOs.write(ByteArrayStartsWith.startsWIthBytes((line + "\n").getBytes(UTF8)), eq(0), eq(line.length() + 1));
 		}
-		replay(mockLogentriesWriter, mockOs);
+		replay(mockLogWriter, mockOs);
 		
 		for (String line : lines) {
 			logDecorator.write((line + "\n").getBytes(UTF8));
 		}
-		verify(mockLogentriesWriter, mockOs);
+		verify(mockLogWriter, mockOs);
 	}
 
 	/**
-	 * Verifies that an error in writing to the LogentriesWriter does not cause
+	 * Verifies that an error in writing to the LogWriter does not cause
 	 * an exception to bubble.
 	 * 
 	 * @throws IOException Shouldn't happen
@@ -72,9 +72,9 @@ public class LogentriesLogDecoratorTest {
 	@Test
 	public void writeError() throws IOException {
 		String line = "error line";
-		mockLogentriesWriter.writeLogentry(line);
+		mockLogWriter.writeLogentry(line);
 		expectLastCall().andThrow(new RuntimeException("Arrrgh"));
-		replay(mockLogentriesWriter);
+		replay(mockLogWriter);
 		logDecorator.write((line + "\n").getBytes(UTF8));
 	}
 

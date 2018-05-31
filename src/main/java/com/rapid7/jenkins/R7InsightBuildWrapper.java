@@ -1,7 +1,7 @@
-package com.logentries.jenkins;
+package com.rapid7.jenkins;
 
 import com.google.common.base.Strings;
-import com.logentries.jenkins.Messages;
+import com.rapid7.jenkins.Messages;
 import hudson.Extension;
 import hudson.Launcher;
 import hudson.model.AbstractBuild;
@@ -14,18 +14,18 @@ import org.kohsuke.stapler.DataBoundConstructor;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class LogentriesBuildWrapper extends hudson.tasks.BuildWrapper {
+public class R7InsightBuildWrapper extends hudson.tasks.BuildWrapper {
     private final String token;
     private final String region;
     private String endpoint;
 
     /**
-     * Create a new {@link LogentriesBuildWrapper}.
+     * Create a new {@link R7InsightBuildWrapper}.
      *
      * @param token The token for the Rapid7 InsightOps log
      */
     @DataBoundConstructor
-    public LogentriesBuildWrapper(String token, String region, String endpoint) {
+    public R7InsightBuildWrapper(String token, String region, String endpoint) {
         this.token = token;
         this.region = region;
         this.endpoint = endpoint;
@@ -67,11 +67,11 @@ public class LogentriesBuildWrapper extends hudson.tasks.BuildWrapper {
 
         try {
             if (Strings.isNullOrEmpty(endpoint)) {
-                endpoint = String.format(LogentriesTcpTokenWriter.DATA_ENDPOINT_TEMPLATE, region);
+                endpoint = String.format(LogTcpTokenWriter.DATA_ENDPOINT_TEMPLATE, region);
             }
-            LogentriesWriter logentriesWriter
-                    = new AsynchronousLogentriesWriter(new LogentriesTcpTokenWriter(token, endpoint));
-            decoratedOs = new LogentriesLogDecorator(logger, logentriesWriter);
+            LogWriter logWriter
+                    = new AsynchronousLogWriter(new LogTcpTokenWriter(token, endpoint));
+            decoratedOs = new LogDecorator(logger, logWriter);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (RuntimeException e) {
@@ -103,7 +103,7 @@ public class LogentriesBuildWrapper extends hudson.tasks.BuildWrapper {
     public static final class DescriptorImpl extends BuildWrapperDescriptor {
 
         public DescriptorImpl() {
-            super(LogentriesBuildWrapper.class);
+            super(R7InsightBuildWrapper.class);
             load();
         }
 

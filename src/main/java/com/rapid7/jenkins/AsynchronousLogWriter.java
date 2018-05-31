@@ -1,4 +1,4 @@
-package com.logentries.jenkins;
+package com.rapid7.jenkins;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
@@ -8,19 +8,19 @@ import java.util.concurrent.TimeUnit;
 /**
  * Class to write logs to Rapid7 InsightOps asynchronously
  */
-public class AsynchronousLogentriesWriter implements LogentriesWriter {
+public class AsynchronousLogWriter implements LogWriter {
 
     private static final int SHUTDOWN_TIMEOUT_SECONDS = 10;
 
     private final ExecutorService executor;
-    private final LogentriesWriter leWriter;
+    private final LogWriter leWriter;
 
     /**
      * Constructor.
      *
      * @param leWriter Used to write entries to Rapid7 InsightOps.
      */
-    public AsynchronousLogentriesWriter(LogentriesWriter leWriter) {
+    public AsynchronousLogWriter(LogWriter leWriter) {
         this.executor = Executors.newSingleThreadExecutor();
         this.leWriter = leWriter;
     }
@@ -52,7 +52,7 @@ public class AsynchronousLogentriesWriter implements LogentriesWriter {
         try {
             if (!executor.awaitTermination(SHUTDOWN_TIMEOUT_SECONDS,
                     TimeUnit.SECONDS)) {
-                System.err.println("LogentriesWriter shutdown before finished execution");
+                System.err.println("LogWriter shutdown before finished execution");
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

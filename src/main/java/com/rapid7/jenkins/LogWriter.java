@@ -1,11 +1,11 @@
-package com.logentries.jenkins;
+package com.rapid7.jenkins;
 
 import java.io.IOException;
 
 /**
  * Writes lines to Rapid7 InsightOps.
  */
-public interface LogentriesWriter {
+public interface LogWriter {
 
     /**
      * Writes the given line to Rapid7 InsightOps.
