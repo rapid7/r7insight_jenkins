@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 public class LogDecorator extends LineTransformationOutputStream {
 
     private final OutputStream wrappedOutputStream;
-    private final LogWriter logWriter;
+    private final LogWriter leWriter;
 
     /**
      * Constructor
@@ -18,9 +18,10 @@ public class LogDecorator extends LineTransformationOutputStream {
      * @throws IOException
      * @throws UnknownHostException
      */
-    public LogDecorator(OutputStream os, LogWriter logWriter) throws IOException {
+    public LogDecorator(OutputStream os, LogWriter leWriter)
+            throws UnknownHostException, IOException {
         this.wrappedOutputStream = os;
-        this.logWriter = logWriter;
+        this.leWriter = leWriter;
     }
 
     /**
@@ -42,7 +43,7 @@ public class LogDecorator extends LineTransformationOutputStream {
     // Should we close this here?
     @Override
     public void close() throws IOException {
-        logWriter.close();
+        leWriter.close();
         super.close();
         wrappedOutputStream.close();
     }
@@ -56,7 +57,7 @@ public class LogDecorator extends LineTransformationOutputStream {
             }
             // TODO Verify that the byte are encoded using the platform default (not UTF8)
             if (end > 0) {
-                logWriter.writeLogentry(new String(bytes, 0, end + 1));
+                leWriter.writeLogentry(new String(bytes, 0, end + 1));
                 wrappedOutputStream.write(bytes, 0, length);
             }
         }

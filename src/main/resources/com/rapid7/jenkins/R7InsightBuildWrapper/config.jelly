@@ -8,10 +8,10 @@
         <f:textbox clazz="string" name="token" value="${it.token}"/>
     </f:entry>
     <f:entry title="Choose Region" field="region">
-        <f:select name="region"
-                  value="${it.region}"
-                  onchange="setEndpoint(this.value)"
-        />
+            <f:select name="region"
+                      value="${it.region}"
+                      onchange="setEndpoint(this.value)"
+            />
     </f:entry>
     <f:entry title="Data Endpoint" field="endpoint">
         <f:textbox id="r7_endpoint"
