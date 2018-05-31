@@ -22,9 +22,9 @@ public class R7InsightBuildWrapper extends hudson.tasks.BuildWrapper {
     /**
      * Create a new {@link R7InsightBuildWrapper}.
      *
-     * @param token The token for the Rapid7 InsightOps log
-     * @param region The storage region to transmit the logs
-     * @param endpoint  The data ingestion endpoint to transmit the logs to
+     * @param token    The token for the Rapid7 InsightOps log
+     * @param region   The storage region to transmit the logs
+     * @param endpoint The data ingestion endpoint to transmit the logs to
      */
     @DataBoundConstructor
     public R7InsightBuildWrapper(String token, String region, String endpoint) {
@@ -111,10 +111,10 @@ public class R7InsightBuildWrapper extends hudson.tasks.BuildWrapper {
 
         public ListBoxModel doFillRegionItems() {
             ListBoxModel m = new ListBoxModel();
-            m.add("Europe","eu");
-            m.add("United States","us");
-            m.add("Canada","ca");
-            m.add("Australia","au");
+            m.add("Europe", "eu");
+            m.add("United States", "us");
+            m.add("Canada", "ca");
+            m.add("Australia", "au");
             return m;
         }
 
