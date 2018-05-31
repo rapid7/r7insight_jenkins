@@ -1,5 +1,25 @@
 <j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
-	<f:entry title="Token" field="token">
-	   <f:textbox clazz="string" name="token" value="${it.token}"/>
-	</f:entry>
+    <script>
+        function setEndpoint(region) {
+            window.document.getElementById('r7_endpoint').value = region + ".data.logs.insight.rapid7.com";
+        }
+    </script>
+    <f:entry title="Token" field="token">
+        <f:textbox clazz="string" name="token" value="${it.token}"/>
+    </f:entry>
+    <f:entry title="Choose Region" field="region">
+            <f:select name="region"
+                      value="${it.region}"
+                      onchange="setEndpoint(this.value)"
+            />
+    </f:entry>
+    <f:entry title="Data Endpoint" field="endpoint">
+        <f:textbox id="r7_endpoint"
+                   clazz="string"
+                   name="endpoint"
+                   value="${it.endpoint}"
+                   default="eu.data.logs.insight.rapid7.com"
+        />
+    </f:entry>
 </j:jelly>
+

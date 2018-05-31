@@ -24,7 +24,7 @@ public class LogentriesLogDecoratorTest {
 
 	private OutputStream mockOs;
 	private LogentriesWriter mockLogentriesWriter;
-	private LogentriesLogDecorator logentriesLogDecorator;
+	private LogentriesLogDecorator logDecorator;
 	
 	
 	/**
@@ -36,7 +36,7 @@ public class LogentriesLogDecoratorTest {
 	public void initMocks() throws UnknownHostException, IOException {
 		mockOs = createMock(OutputStream.class);
 		mockLogentriesWriter = createMock(LogentriesWriter.class);
-		logentriesLogDecorator = new LogentriesLogDecorator(mockOs, mockLogentriesWriter);
+		logDecorator = new LogentriesLogDecorator(mockOs, mockLogentriesWriter);
 	}
 	
 	/**
@@ -58,7 +58,7 @@ public class LogentriesLogDecoratorTest {
 		replay(mockLogentriesWriter, mockOs);
 		
 		for (String line : lines) {
-			logentriesLogDecorator.write((line + "\n").getBytes(UTF8));
+			logDecorator.write((line + "\n").getBytes(UTF8));
 		}
 		verify(mockLogentriesWriter, mockOs);
 	}
@@ -71,11 +71,11 @@ public class LogentriesLogDecoratorTest {
 	 */
 	@Test
 	public void writeError() throws IOException {
-		String line = "errot line";
+		String line = "error line";
 		mockLogentriesWriter.writeLogentry(line);
 		expectLastCall().andThrow(new RuntimeException("Arrrgh"));
 		replay(mockLogentriesWriter);
-		logentriesLogDecorator.write((line + "\n").getBytes(UTF8));
+		logDecorator.write((line + "\n").getBytes(UTF8));
 	}
 
 	private static class ByteArrayStartsWith implements IArgumentMatcher {
@@ -87,12 +87,9 @@ public class LogentriesLogDecoratorTest {
 	    }
 
 	    public boolean matches(Object actual) {
-	        if (!(actual instanceof byte[])) {
-	            return false;
-	        }
-	        return matches((byte[]) actual, expectedBytes);
-	        
-	    }
+			return actual instanceof byte[] && matches((byte[]) actual, expectedBytes);
+
+		}
 	    
 	    public boolean matches(byte[] actual, byte[] expected) {
 			boolean matches = true;
