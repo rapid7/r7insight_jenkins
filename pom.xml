@@ -9,14 +9,14 @@
 		<version>1.424</version>
 	</parent>
 
-	<artifactId>logentries</artifactId>
+	<artifactId>r7insight_jenkins</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>hpi</packaging>
 
 
-	<name>Logentries Forwarder</name>
-	<description>Forwards console output for a build to logentries.com</description>
-	<url>http://wiki.jenkins-ci.org/display/JENKINS/Logentries+Plugin</url>
+	<name>Rapid7 InsightOps Forwarder</name>
+	<description>Forwards console output for a build to Rapid7 InsightOps</description>
+	<url>http://wiki.jenkins-ci.org/display/JENKINS/Rapid7+Insight+Plugin</url>
 	<licenses>
 		<license>
 			<name>The MIT license</name>
@@ -40,9 +40,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/logentries/logentries-jenkins.git</connection>
-		<developerConnection>scm:git:git@github.com:logentries/logentries-jenkins.git</developerConnection>
-		<url>http://github.com/logentries/logentries-jenkins</url>
+		<connection>scm:git:git://github.com/rapid7/r7insight_jenkins.git</connection>
+		<developerConnection>scm:git:git@github.com:rapid7/r7insight_jenkins.git</developerConnection>
+		<url>https://github.com/rapid7/r7insight_jenkins</url>
 	</scm>
 
 	<repositories>
