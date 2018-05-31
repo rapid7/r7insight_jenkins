@@ -11,15 +11,6 @@ import java.nio.charset.Charset;
  * Writes lines to Rapid7 InsightOps using the Token TCP input
  */
 public class LogTcpTokenWriter implements LogWriter {
-
-    /**
-     * Rapid7 InsightOps API server address.
-     */
-    public static final String DATA_ENDPOINT_TEMPLATE = "%s.data.logs.insight.rapid7.com";
-    /**
-     * Port number for Token logging on Rapid7 InsightOps API server.
-     */
-    private static final int PORT = 443;
     /**
      * UTF-8 output character set.
      */
@@ -33,13 +24,14 @@ public class LogTcpTokenWriter implements LogWriter {
      * Constructor
      *
      * @param token    The token for the logfile
-     * @param endpoint Endpoints to transmit the logs
+     * @param port     The port to connect to the data endpoint
+     * @param endpoint Data ingestion endpoint to transmit the logs
      * @throws IOException If there was a problem connecting to Rapid7 InsightOps.
      */
-    public LogTcpTokenWriter(String token, String endpoint) throws IOException {
+    public LogTcpTokenWriter(String token, String endpoint, int port) throws IOException {
         this.token = token;
-        socket = SSLSocketFactory.getDefault().createSocket(endpoint, PORT);
-        outputStream = socket.getOutputStream();
+        this.socket = SSLSocketFactory.getDefault().createSocket(endpoint, port);
+        this.outputStream = socket.getOutputStream();
     }
 
     /**

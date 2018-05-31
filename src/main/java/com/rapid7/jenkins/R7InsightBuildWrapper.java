@@ -15,6 +15,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class R7InsightBuildWrapper extends hudson.tasks.BuildWrapper {
+    /**
+     * Rapid7 InsightOps API server address.
+     */
+    private static final String DATA_ENDPOINT_TEMPLATE = "%s.data.logs.insight.rapid7.com";
+    /**
+     * Port number for Token logging on Rapid7 InsightOps API server.
+     */
+    private static final int PORT = 443;
+
     private final String token;
     private final String region;
     private String endpoint;
@@ -69,10 +78,10 @@ public class R7InsightBuildWrapper extends hudson.tasks.BuildWrapper {
 
         try {
             if (Strings.isNullOrEmpty(endpoint)) {
-                endpoint = String.format(LogTcpTokenWriter.DATA_ENDPOINT_TEMPLATE, region);
+                endpoint = String.format(DATA_ENDPOINT_TEMPLATE, region);
             }
             LogWriter logWriter
-                    = new AsynchronousLogWriter(new LogTcpTokenWriter(token, endpoint));
+                    = new AsynchronousLogWriter(new LogTcpTokenWriter(token, endpoint, PORT));
             decoratedOs = new LogDecorator(logger, logWriter);
         } catch (IOException e) {
             e.printStackTrace();
@@ -110,12 +119,12 @@ public class R7InsightBuildWrapper extends hudson.tasks.BuildWrapper {
         }
 
         public ListBoxModel doFillRegionItems() {
-            ListBoxModel m = new ListBoxModel();
-            m.add("Europe", "eu");
-            m.add("United States", "us");
-            m.add("Canada", "ca");
-            m.add("Australia", "au");
-            return m;
+            ListBoxModel listModel = new ListBoxModel();
+            listModel.add("Europe", "eu");
+            listModel.add("United States", "us");
+            listModel.add("Canada", "ca");
+            listModel.add("Australia", "au");
+            return listModel;
         }
 
         /**
