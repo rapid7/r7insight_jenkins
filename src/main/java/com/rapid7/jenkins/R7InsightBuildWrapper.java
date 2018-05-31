@@ -23,6 +23,8 @@ public class R7InsightBuildWrapper extends hudson.tasks.BuildWrapper {
      * Create a new {@link R7InsightBuildWrapper}.
      *
      * @param token The token for the Rapid7 InsightOps log
+     * @param region The storage region to transmit the logs
+     * @param endpoint  The data ingestion endpoint to transmit the logs to
      */
     @DataBoundConstructor
     public R7InsightBuildWrapper(String token, String region, String endpoint) {
@@ -43,7 +45,7 @@ public class R7InsightBuildWrapper extends hudson.tasks.BuildWrapper {
     /**
      * Gets the region to transmit the log data
      *
-     * @return custom data ingestion host
+     * @return data storage region
      */
     public String getRegion() {
         return region;
