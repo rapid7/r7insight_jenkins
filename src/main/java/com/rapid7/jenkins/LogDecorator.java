@@ -5,6 +5,7 @@ import hudson.console.LineTransformationOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.UnknownHostException;
+import java.nio.charset.Charset;
 
 public class LogDecorator extends LineTransformationOutputStream {
 
@@ -15,10 +16,9 @@ public class LogDecorator extends LineTransformationOutputStream {
      * Constructor
      *
      * @param os The OutputStream to decorate
-     * @throws IOException
-     * @throws UnknownHostException
+     * @param logWriter  The LogWriter object that writes to Insight Platform
      */
-    public LogDecorator(OutputStream os, LogWriter logWriter) throws IOException {
+    public LogDecorator(OutputStream os, LogWriter logWriter) {
         this.wrappedOutputStream = os;
         this.logWriter = logWriter;
     }
@@ -56,7 +56,7 @@ public class LogDecorator extends LineTransformationOutputStream {
             }
             // TODO Verify that the byte are encoded using the platform default (not UTF8)
             if (end > 0) {
-                logWriter.writeLogentry(new String(bytes, 0, end + 1));
+                logWriter.writeLogentry(new String(bytes, 0, end + 1, Charset.forName("ascii")));
                 wrappedOutputStream.write(bytes, 0, length);
             }
         }

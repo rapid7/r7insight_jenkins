@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.jenkins-ci.plugins</groupId>
 		<artifactId>plugin</artifactId>
-		<version>1.424</version>
+		<version>2.15</version>
 	</parent>
 
 	<artifactId>r7insight_jenkins</artifactId>
@@ -27,7 +27,7 @@
 	<distributionManagement>
 		<repository>
 			<id>maven.jenkins-ci.org</id>
-			<url>http://maven.jenkins-ci.org:8081/content/repositories/releases/</url>
+			<url>https://repo.jenkins-ci.org/releases/</url>
 		</repository>
 	</distributionManagement>
 
@@ -64,6 +64,13 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<configuration>
 					<goals>deploy</goals>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jenkins-ci.tools</groupId>
+				<artifactId>maven-hpi-plugin</artifactId>
+				<configuration>
+					<compatibleSinceVersion>0.17</compatibleSinceVersion>
 				</configuration>
 			</plugin>
 		</plugins>

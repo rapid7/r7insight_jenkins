@@ -1,7 +1,6 @@
 package com.rapid7.jenkins;
 
 import com.google.common.base.Strings;
-import com.rapid7.jenkins.Messages;
 import hudson.Extension;
 import hudson.Launcher;
 import hudson.model.AbstractBuild;
@@ -107,9 +106,6 @@ public class R7InsightBuildWrapper extends hudson.tasks.BuildWrapper {
         return (DescriptorImpl) super.getDescriptor();
     }
 
-    /**
-     * Registers {@link AnsiColorBuildWrapper} as a {@link hudson.tasks.BuildWrapper}.
-     */
     @Extension
     public static final class DescriptorImpl extends BuildWrapperDescriptor {
 
@@ -132,7 +128,7 @@ public class R7InsightBuildWrapper extends hudson.tasks.BuildWrapper {
          */
         @Override
         public String getDisplayName() {
-            return Messages.DisplayName();
+            return Messages.displayName();
         }
 
         /**
