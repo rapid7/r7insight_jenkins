@@ -9,7 +9,7 @@
 		<version>2.15</version>
 	</parent>
 
-	<artifactId>r7insight_log_forwarder</artifactId>
+	<artifactId>r7insight-log-forwarder</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>hpi</packaging>
 
