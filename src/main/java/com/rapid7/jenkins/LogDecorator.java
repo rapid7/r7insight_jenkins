@@ -56,7 +56,7 @@ public class LogDecorator extends LineTransformationOutputStream {
             }
             // TODO Verify that the byte are encoded using the platform default (not UTF8)
             if (end > 0) {
-                logWriter.writeLogentry(new String(bytes, 0, end + 1, Charset.forName("ascii")));
+                logWriter.writeLogentry(new String(bytes, 0, end + 1, Charset.forName("UTF-8")));
                 wrappedOutputStream.write(bytes, 0, length);
             }
         }
