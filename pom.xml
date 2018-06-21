@@ -9,13 +9,13 @@
 		<version>2.15</version>
 	</parent>
 
-	<artifactId>r7insight_jenkins</artifactId>
+	<artifactId>r7insight_log_forwarder</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>hpi</packaging>
 
 
 	<name>Rapid7 InsightOps Log Forwarder</name>
-	<description>Forwards console output for a build to Rapid7 InsightOps</description>
+	<description>Forwards console output for a build to Rapid7 Insight Platform</description>
 	<licenses>
 		<license>
 			<name>The MIT license</name>
