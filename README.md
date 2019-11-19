@@ -5,8 +5,6 @@ Jenkins plug-in for Rapid7 Insight platform.
 
 This plug in is not officially supported or maintained by Rapid7.
 
-If you would be interested in maintaining this project, please contact support@rapid7.com
-
 Usage
 -----
 
